@@ -5,7 +5,7 @@ a lightly Windows Ftp Library for C++11
 #include "win_ftp.hpp"  
 #include <iostream>  
 using	namespace std;  
-//------------------Download-----------------------
+//------------------Download-----------------------  
 WinFTP	ftp;  
 if (!ftp.Open("127.0.0.1", "admin", "test123",21)){  
   cout << "Login FTP Failed" << endl;  
@@ -16,23 +16,23 @@ cout << "---------GetData--------" << endl;
 BinaryData	data;  
 data = ftp.Download("/key.txt");  
 cout << data.to_string() << endl;  
-//------------------Upload--------------------------
-ifstream	f(R"(C:\Users\jack\Desktop\key.txt)", ios::in | ios::binary);
-if (ftp.CreateDirectory("/newfolder")){
-  cout << "Make Success" << endl;
-  if (!ftp.Upload("/newfolder/w.txt", f)){
-    cout << "Upload Failed" << endl;
-    getchar();
-    return -1;
-  }
-  else{
-    cout << "-----Upload Data Success------" << endl;
-  }
-}
-//-------------------List Dir----------------------
+//------------------Upload--------------------------  
+ifstream	f(R"(C:\Users\jack\Desktop\key.txt)", ios::in | ios::binary);  
+if (ftp.CreateDirectory("/newfolder")){  
+  cout << "Make Success" << endl;  
+  if (!ftp.Upload("/newfolder/w.txt", f)){  
+    cout << "Upload Failed" << endl;  
+    getchar();  
+    return -1;  
+  }  
+  else{  
+    cout << "-----Upload Data Success------" << endl;  
+  }  
+}  
+//-------------------List Dir----------------------  
 cout << ftp.FtpCommand("LIST\r\n") << endl;  
 
-//-----------------FtpCommand without Response----
+//-----------------FtpCommand without Response----  
 ftp.FtpCommand("MKD newfolder\r\n",FALSE);  
 valid [command](http://www.nsftools.com/tips/RawFTP.htm#LIST)  
 
