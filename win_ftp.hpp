@@ -47,6 +47,7 @@ public:
 	bool		RemoveDirectory(std::string dirname);
 	bool		DeleteFile(std::string path);
 	bool		Close();
+	~WinFTP();
 private:
 	HINTERNET	hInternet;
 	HINTERNET	hConnect;
@@ -306,10 +307,16 @@ bool	WinFTP::Close(){
 	if (NULL != hConnect)
 	{
 		::InternetCloseHandle(hConnect);
+		hConnect = NULL;
 	}
 	if (NULL != hInternet)
 	{
 		::InternetCloseHandle(hInternet);
+		hInternet = NULL;
 	}
 	return TRUE;
+}
+
+WinFTP::~WinFTP(){
+	this->Close();
 }
